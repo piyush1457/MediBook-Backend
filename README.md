@@ -150,13 +150,55 @@ erDiagram
     centre_tests ||--o{ bookings : "priced by"
     bookings ||--o{ payments : "paid by"
     bookings ||--o{ webhook_events : "notified (logical)"
-    users { uuid id PK; string email UK; string hashed_password; string full_name; bool is_admin }
-    centres { uuid id PK; string name; string city; string address }
-    diagnostic_tests { uuid id PK; string name UK; string description }
-    centre_tests { uuid id PK; uuid centre_id FK; uuid test_id FK; numeric price }
-    bookings { uuid id PK; uuid user_id FK; uuid centre_id FK; uuid test_id FK; uuid centre_test_id FK; timestamptz appointment_at; numeric amount; string status }
-    payments { uuid id PK; uuid booking_id FK; numeric amount; string status; string provider_reference UK; string idempotency_key UK }
-    webhook_events { uuid id PK; string event_id UK; json payload; string status; string reason }
+    users {
+        uuid id PK
+        string email UK
+        string hashed_password
+        string full_name
+        bool is_admin
+    }
+    centres {
+        uuid id PK
+        string name
+        string city
+        string address
+    }
+    diagnostic_tests {
+        uuid id PK
+        string name UK
+        string description
+    }
+    centre_tests {
+        uuid id PK
+        uuid centre_id FK
+        uuid test_id FK
+        numeric price
+    }
+    bookings {
+        uuid id PK
+        uuid user_id FK
+        uuid centre_id FK
+        uuid test_id FK
+        uuid centre_test_id FK
+        timestamptz appointment_at
+        numeric amount
+        string status
+    }
+    payments {
+        uuid id PK
+        uuid booking_id FK
+        numeric amount
+        string status
+        string provider_reference UK
+        string idempotency_key UK
+    }
+    webhook_events {
+        uuid id PK
+        string event_id UK
+        json payload
+        string status
+        string reason
+    }
 ```
 
 Key constraints / indexes and WHY:
